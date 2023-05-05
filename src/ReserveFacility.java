@@ -17,7 +17,7 @@ public class ReserveFacility extends JFrame {
 
     public ReserveFacility() {
         // Set up the frame
-        setTitle("MYAPT");
+        super("MYAPT");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

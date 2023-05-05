@@ -14,7 +14,7 @@ public class ReservationStatus extends JFrame {
     private DefaultTableModel tableModel;
 
     public ReservationStatus() {
-        setTitle("MYAPT");
+        super("MYAPT");
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

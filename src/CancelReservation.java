@@ -10,7 +10,7 @@ public class CancelReservation extends JFrame implements ActionListener {
 
     public CancelReservation() {
         // Set up the frame
-        setTitle("Cancel Reservation");
+        super("MYAPT");
         setSize(700, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -19,7 +19,7 @@ public class CancelReservation extends JFrame implements ActionListener {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Add a label to the panel
-        JLabel label = new JLabel("Select a reservation to cancel:");
+        JLabel label = new JLabel("취소하실 예약을 선택해주세요:");
         panel.add(label);
 
         // Add a combo box to the panel
@@ -30,7 +30,7 @@ public class CancelReservation extends JFrame implements ActionListener {
         readReservationsFromFile();
 
         // Add a button to the panel
-        JButton cancelButton = new JButton("Cancel Reservation");
+        JButton cancelButton = new JButton("예약 취소하기");
         cancelButton.addActionListener(this);
         panel.add(cancelButton);
 

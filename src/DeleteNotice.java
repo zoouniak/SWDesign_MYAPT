@@ -10,7 +10,7 @@ public class DeleteNotice extends JFrame {
     private ArrayList<String> notices;
 
     public DeleteNotice() {
-        setTitle("Delete Notice");
+        super("MYAPT");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

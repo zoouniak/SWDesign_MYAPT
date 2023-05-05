@@ -12,11 +12,11 @@ public class CheckNotice extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // create UI components
-        JLabel titleLabel = new JLabel("Notices:");
+        JLabel titleLabel = new JLabel("공지사항:");
         noticeArea = new JTextArea(10, 30);
         noticeArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(noticeArea);
-        JButton loadButton = new JButton("Load Notices");
+        JButton loadButton = new JButton("공지사항 불러오기");
         loadButton.addActionListener(e -> loadNotices());
 
         // add components to content pane

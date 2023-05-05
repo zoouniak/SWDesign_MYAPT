@@ -55,7 +55,7 @@ public class ChooseService extends JFrame {
         panel.add(registerLostAndFoundButton, c);
 
         // Add deletion button
-        JButton deletionButton = new JButton("습득물 삭제");
+        JButton deletionButton = new JButton("분실물 삭제");
         c.gridx = 1;
         c.gridy = 2;
         c.gridwidth = 1;

@@ -8,7 +8,7 @@ public class ChooseApartment extends JFrame {
 
     public ChooseApartment() {
         // Set up the frame
-        setTitle("MYAPT");
+        super("MYAPT");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 150);

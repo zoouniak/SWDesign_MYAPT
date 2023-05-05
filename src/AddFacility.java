@@ -10,7 +10,7 @@ public class AddFacility extends JFrame {
     private JButton registerButton;
 
     public AddFacility() {
-        setTitle("Add Facility");
+        setTitle("MYAPT");
         setSize(500, 100);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

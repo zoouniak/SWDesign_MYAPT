@@ -8,6 +8,7 @@ public class AddNotice extends JFrame {
     private JButton registerButton;
 
     public AddNotice() {
+        super("MYAPT");
         setSize(700, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

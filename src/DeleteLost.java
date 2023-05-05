@@ -10,7 +10,6 @@ public class DeleteLost extends JFrame {
 
     public DeleteLost() {
         super("MYAPT");
-        setTitle("습득물 삭제");
         setSize(500, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

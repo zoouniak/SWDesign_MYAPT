@@ -16,7 +16,6 @@ public class RegisterFound extends JFrame {
 
     public RegisterFound() {
         super("MYAPT");
-        setTitle("분실물 등록");
         setSize(1000, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -25,13 +24,13 @@ public class RegisterFound extends JFrame {
         mainPanel.setLayout(new GridLayout(8, 1));
 
         JPanel titlePanel = new JPanel(new FlowLayout());
-        JLabel titleLabel = new JLabel("분실물 등록");
+        JLabel titleLabel = new JLabel("습득물 등록");
         titleLabel.setFont(new Font(null, Font.BOLD, 40));
         titlePanel.add(titleLabel);
         mainPanel.add(titlePanel, BorderLayout.NORTH);
         // Create top panel for name label and text field
         JPanel namePanel = new JPanel(new FlowLayout());
-        JLabel nameLabel = new JLabel("분실물 이름:");
+        JLabel nameLabel = new JLabel("습득물 이름:");
         nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(400, 30));
         namePanel.add(nameLabel);
@@ -68,14 +67,14 @@ public class RegisterFound extends JFrame {
         // Create photo panel for photo label and button
         JPanel photoPanel = new JPanel(new FlowLayout());
         JLabel photoLabel = new JLabel("사진:");
-        photoButton = new JButton("Select Photo");
+        photoButton = new JButton("사진 선택하기");
         photoPanel.add(photoLabel);
         photoPanel.add(photoButton);
         mainPanel.add(photoPanel, BorderLayout.CENTER);
 
         // Create bottom panel for register button
         JPanel registerPanel = new JPanel(new FlowLayout());
-        registerButton = new JButton("Register");
+        registerButton = new JButton("등록하기");
         registerPanel.add(registerButton);
         mainPanel.add(registerPanel, BorderLayout.SOUTH);
 
