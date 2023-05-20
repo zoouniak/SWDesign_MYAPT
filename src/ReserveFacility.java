@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ReserveFacility extends JFrame {
-    private JPanel panel;
+
     private JComboBox<String> FacilityCombo;
     private JComboBox<String> timeCombo;
     private JTextField dateField;
     private JTextField nameField;
     private JTextField contactField;
-    private JButton reserveButton;
 
     public ReserveFacility() {
         // Set up the frame
@@ -22,7 +21,7 @@ public class ReserveFacility extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create the panel and set the layout
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(6, 2, 10, 10));
 
         // Create the components
@@ -36,7 +35,7 @@ public class ReserveFacility extends JFrame {
         timeCombo = new JComboBox<>(new String[]{"9:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00"});
         nameField = new JTextField();
         contactField = new JTextField();
-        reserveButton = new JButton("예약하기");
+        JButton reserveButton = new JButton("예약하기");
 
         // Add the components to the panel
         panel.add(FacilityLabel);
@@ -53,46 +52,17 @@ public class ReserveFacility extends JFrame {
         panel.add(reserveButton);
 
         // Add an action listener to the reserve button
-        reserveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the values from the input fields
-                String Facility = (String) FacilityCombo.getSelectedItem();
-                String date = dateField.getText();
-                String time = (String) timeCombo.getSelectedItem();
-                String name = nameField.getText();
-                String contact = contactField.getText();
-
-                if (Facility.isEmpty() || date.isEmpty() || time.isEmpty() || name.isEmpty() || contact.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
-                } else if (!date.matches("\\d{4}/\\d{2}/\\d{2}")) {
-                    JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
-                    return;
-                } else if (!contact.matches("\\d{3}-\\d{4}-\\d{4}")) {
-                    JOptionPane.showMessageDialog(null, "연락처 입력 양식(000-0000-0000)에 맞게 입력해주세요.");
-                } else {
-                    // Show a confirmation message
-                    try {
-                        saveReservation(Facility, date, time, name, contact);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    JOptionPane.showMessageDialog(ReserveFacility.this, "예약이 완료되었습니다!", "예약 완료", JOptionPane.INFORMATION_MESSAGE);
-                    setVisible(false);
-                }
-            }
+        reserveButton.addActionListener(e -> {
+            checkReservceInfo();
         });
-
         // Add the panel to the frame
         add(panel);
 
-        // Show the frame
-        //setVisible(true);
     }
+
     private void saveReservation(String facility, String date, String time, String name, String contact) throws IOException {
         FileWriter writer = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv", true);
         PrintWriter printer = new PrintWriter(writer);
-
         printer.print(facility);
         printer.print(",");
         printer.print(date);
@@ -108,4 +78,29 @@ public class ReserveFacility extends JFrame {
         writer.close();
     }
 
+    private void checkReservceInfo() {
+        String Facility = (String) FacilityCombo.getSelectedItem();
+        String date = dateField.getText();
+        String time = (String) timeCombo.getSelectedItem();
+        String name = nameField.getText();
+        String contact = contactField.getText();
+
+        if (Facility.isEmpty() || date.isEmpty() || time.isEmpty() || name.isEmpty() || contact.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
+        } else if (!date.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
+            return;
+        } else if (!contact.matches("\\d{3}-\\d{4}-\\d{4}")) {
+            JOptionPane.showMessageDialog(null, "연락처 입력 양식(000-0000-0000)에 맞게 입력해주세요.");
+        } else {
+            // Show a confirmation message
+            try {
+                saveReservation(Facility, date, time, name, contact);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            JOptionPane.showMessageDialog(ReserveFacility.this, "예약이 완료되었습니다!", "예약 완료", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+        }
+    }
 }

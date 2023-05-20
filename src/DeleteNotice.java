@@ -6,7 +6,6 @@ import java.util.*;
 
 public class DeleteNotice extends JFrame {
     private JCheckBox[] checkBoxes;
-    private JButton deleteButton;
     private ArrayList<String> notices;
 
     public DeleteNotice() {
@@ -34,21 +33,9 @@ public class DeleteNotice extends JFrame {
         }
 
         // Create delete button
-        deleteButton = new JButton("Delete");
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
-                    for (int i = 0; i < checkBoxes.length; i++) {
-                        if (!checkBoxes[i].isSelected()) {
-                            writer.println(notices.get(i));
-                        }
-                    }
-                    JOptionPane.showMessageDialog(null, "Notices deleted successfully");
-                    dispose();
-                } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(null, "Notice.csv not found");
-                }
-            }
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(e -> {
+            deleteFromFile();
         });
 
         // Add components to the frame
@@ -56,5 +43,18 @@ public class DeleteNotice extends JFrame {
         getContentPane().add(deleteButton, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+    private void deleteFromFile(){
+        try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
+            for (int i = 0; i < checkBoxes.length; i++) {
+                if (!checkBoxes[i].isSelected()) {
+                    writer.println(notices.get(i));
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Notices deleted successfully");
+            dispose();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Notice.csv not found");
+        }
     }
 }

@@ -6,8 +6,6 @@ import java.io.*;
 
 public class DeleteLost extends JFrame {
     private JComboBox<String> foundItemsComboBox;
-    private JButton deleteButton;
-
     public DeleteLost() {
         super("MYAPT");
         setSize(500, 200);
@@ -28,7 +26,7 @@ public class DeleteLost extends JFrame {
 
         // Create delete button panel
         JPanel deleteButtonPanel = new JPanel(new FlowLayout());
-        deleteButton = new JButton("삭제");
+        JButton deleteButton = new JButton("삭제");
         deleteButtonPanel.add(deleteButton);
         mainPanel.add(deleteButtonPanel, BorderLayout.SOUTH);
 
@@ -39,17 +37,15 @@ public class DeleteLost extends JFrame {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Add action listener to delete button
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Get the selected item from the combo box
-                String selectedItem = (String) foundItemsComboBox.getSelectedItem();
-                // Delete the selected item from the csv file
-                deleteFoundItem(selectedItem);
-                // Reload the combo box with the updated list of found items
-                loadFoundItems();
-                // Display a success message
-                //JOptionPane.showMessageDialog(null, "선택한 습득물이 삭제되었습니다.");
-            }
+        deleteButton.addActionListener(e -> {
+            // Get the selected item from the combo box
+            String selectedItem = (String) foundItemsComboBox.getSelectedItem();
+            // Delete the selected item from the csv file
+            deleteFoundItem(selectedItem);
+            // Reload the combo box with the updated list of found items
+            loadFoundItems();
+            // Display a success message
+            //JOptionPane.showMessageDialog(null, "선택한 습득물이 삭제되었습니다.");
         });
     }
 
@@ -88,18 +84,25 @@ public class DeleteLost extends JFrame {
                 if (!itemName.equals(lineToRemove)) {
                     writer.write(currentLine + System.getProperty("line.separator"));
                 }
-            }
 
+            }
+            inputFile.renameTo(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\fortemp.csv"));
+            tempFile.renameTo(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv"));
             writer.close();
             reader.close();
 
-            inputFile.renameTo(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\fortemp.csv"));
-            tempFile.renameTo(inputFile);
+
 
             JOptionPane.showMessageDialog(null, "분실물이 삭제되었습니다.");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "오류가 발생했습니다.");
             ex.printStackTrace();
         }
+        dispose();
+    }
+    public static void main(String[] args){
+        DeleteLost deleteLost = new DeleteLost();
+        deleteLost.setVisible(true);
     }
 }
+

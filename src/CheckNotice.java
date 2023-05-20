@@ -10,7 +10,8 @@ public class CheckNotice extends JFrame {
     public CheckNotice() {
         super("MYAPT");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        setSize(400, 300);
+        setLocationRelativeTo(null);
         // create UI components
         JLabel titleLabel = new JLabel("공지사항:");
         noticeArea = new JTextArea(10, 30);
@@ -27,9 +28,7 @@ public class CheckNotice extends JFrame {
         c.add(loadButton, BorderLayout.SOUTH);
 
         // set window properties
-        setSize(400, 300);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     private void loadNotices() {

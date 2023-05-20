@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Login extends JFrame {
+public class Login extends JFrame{
+
+    private JTextField jtf1;
+    private JPasswordField jtf2;
 
     public Login() {
         JPanel imagePanel = new JPanel(new BorderLayout());
@@ -30,7 +33,7 @@ public class Login extends JFrame {
         idPanel.add(jlb1);
 
         JPanel idPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JTextField jtf1 = new JTextField(10);
+        jtf1 = new JTextField(10);
 
         idPanel2.add(jtf1);
 
@@ -41,7 +44,7 @@ public class Login extends JFrame {
         JLabel jlb2 = new JLabel("비밀번호 : ", JLabel.CENTER);
 
         JPanel pwdPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JPasswordField jtf2 = new JPasswordField(10);
+        jtf2 = new JPasswordField(10);
 
         pwdPanel.add(jlb2);
         pwdPanel2.add(jtf2);
@@ -63,6 +66,18 @@ public class Login extends JFrame {
         JButton join = new JButton("회원가입");
         loginPanel.add(jLogin);
         joinPanel.add(join);
+        join.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openSignup();
+            }
+        });
+        jLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleLogin();
+            }
+        });
 
         jp1.add(loginPanel);
         jp1.add(joinPanel);
@@ -83,48 +98,53 @@ public class Login extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setVisible(true);
-        jLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String enteredUsername = jtf1.getText();
-                String enteredPassword = new String(jtf2.getPassword());
-
-                try {
-                    boolean loginSuccessful = User.checkLoginInfo(enteredUsername, enteredPassword, "C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv");
-
-                    if (loginSuccessful) {
-                        if (enteredUsername.equals("0")) {
-                            Admin admin = new Admin();
-                            admin.setVisible(true);
-                            dispose();
-                        }
-                        // Open the ApartmentGUI window
-                        else {
-                            ChooseApartment apartmentGUI = new ChooseApartment();
-                            apartmentGUI.setVisible(true);
-                            dispose(); // Close the Login window
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(Login.this, "해당 로그인 정보가 존재하지 않습니다", "User Failed", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(Login.this, "파일을 읽어들이지 못하였습니다", "User Failed", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        join.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Signup signup = new Signup();
-                signup.setVisible(true);
-            }
-        });
     }
+    private void handleLogin() {
+        String enteredUsername = jtf1.getText();
+        String enteredPassword = new String(jtf2.getPassword());
+
+        try {
+            if(enteredUsername.isEmpty() || enteredPassword.isEmpty()){
+                JOptionPane.showMessageDialog(Login.this,"아이디와 비밀번호를 입력하세요","Nother Entered",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            boolean loginSuccessful = User.checkLoginInfo(enteredUsername, enteredPassword, "C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv");
+
+
+            if (loginSuccessful) {
+                if (enteredUsername.equals("0")) {
+                    openAdmin();
+                } else {
+                    openUser();
+                }
+            } else {
+                JOptionPane.showMessageDialog(Login.this, "해당 로그인 정보가 존재하지 않습니다", "User Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(Login.this, "파일을 읽어들이지 못하였습니다", "User Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void openSignup() {
+        dispose();
+        Signup signup = new Signup();
+        signup.setVisible(true);
+    }
+    private void openAdmin(){
+        dispose();
+        Admin admin = new Admin();
+        admin.setVisible(true);
+    }
+    private void openUser(){
+        dispose();
+        ChooseApartment chooseApartment = new ChooseApartment();
+        chooseApartment.setVisible(true);
+    }
+
     public static void main(String[] args){
         Login login = new Login();
         login.setVisible(true);
     }
+
 }
+
+

@@ -2,9 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChooseApartment extends JFrame {
-    private static final long serialVersionUID = 1L;
+    List<String> apartmentNames;
+    JComboBox<String> apartmentChoice;
 
     public ChooseApartment() {
         // Set up the frame
@@ -23,9 +30,21 @@ public class ChooseApartment extends JFrame {
         Panel choicePanel = new Panel();
         add(choicePanel, BorderLayout.CENTER);
 
-        // Create a Choice component and add the options
-        String[] apartmentOptions = {"선택", "힐스테이트", "롯데캐슬", "화성파크드림"};
-        JComboBox<String> apartmentChoice = new JComboBox<>(apartmentOptions);
+        GetApt();
+// Create an array to hold the apartment options
+        String[] apartmentOptions = new String[apartmentNames.size() + 1];
+
+// Add the "선택" option to the first index of the array
+        apartmentOptions[0] = "선택";
+
+
+// Loop through the apartment names and add them to the array
+        for (int i = 0; i < apartmentNames.size(); i++) {
+            apartmentOptions[i + 1] = apartmentNames.get(i);
+        }
+
+// Create the JComboBox with the apartment options
+        apartmentChoice = new JComboBox<>(apartmentOptions);
         apartmentChoice.setSelectedIndex(0);
 
         // Add the Choice component to the panel
@@ -40,23 +59,50 @@ public class ChooseApartment extends JFrame {
         selectButton.setFont(font);
         messagePanel.add(selectButton);
 
-        selectButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Get the selected item from the Choice component
-                String selectedItem = (String) apartmentChoice.getSelectedItem();
-
-                // Check if an apartment was selected
-                if (selectedItem.equals("선택")) {
-                    JOptionPane.showMessageDialog(null, "아파트를 선택하세요");
-                } else {
-                    //JOptionPane.showMessageDialog(null, "You selected: " + selectedItem);
-                    dispose();
-                    ChooseService facilityGUI = new ChooseService();
-                    facilityGUI.setVisible(true);
-                }
-            }
+        selectButton.addActionListener((ActionListener) e -> {
+            select();
         });
 
         setVisible(true);
+    }
+
+    private void GetApt() {
+        // Create a list to hold the apartment names
+        apartmentNames = new ArrayList<>();
+
+        // Create a new File object with the file path
+        File file = new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\AptList.csv");
+
+        // Create a new BufferedReader to read the file
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+
+            // Read each line of the file
+            while ((line = reader.readLine()) != null) {
+                // Split the line into an array of apartment names
+                String[] apartmentRow = line.split(",");
+
+                // Add each apartment name to the list
+                for (String apartmentName : apartmentRow) {
+                    apartmentNames.add(apartmentName.trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void select() {
+        // Get the selected item from the Choice component
+        String selectedItem = (String) apartmentChoice.getSelectedItem();
+
+        // Check if an apartment was selected
+        if (selectedItem.equals("선택")) {
+            JOptionPane.showMessageDialog(null, "아파트를 선택하세요");
+        } else {
+            dispose();
+            ChooseService facilityGUI = new ChooseService();
+            facilityGUI.setVisible(true);
+        }
     }
 }

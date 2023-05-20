@@ -33,31 +33,28 @@ public class AddNotice extends JFrame {
         add(mainPanel);
         setVisible(true);
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String notice = NoticeField.getText();
-                if (!notice.isEmpty()) {
-                    try {
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv", true));
-                        writer.write(notice + "\n");
-                        writer.close();
-                        JOptionPane.showMessageDialog(null, "공지사항이 성공적으로 등록되었습니다.");
-                        NoticeField.setText("");
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error saving notice to file");
-                        ex.printStackTrace();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "공지사항을 입력해주세요");
-                }
-            }
+        registerButton.addActionListener(e -> {
+            addNotice();
         });
 
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new AddNotice();
+    private void addNotice() {
+        String notice = NoticeField.getText();
+        if (!notice.isEmpty()) {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv", true));
+                writer.write(notice + "\n");
+                writer.close();
+                JOptionPane.showMessageDialog(null, "공지사항이 성공적으로 등록되었습니다.");
+                NoticeField.setText("");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error saving notice to file");
+                ex.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "공지사항을 입력해주세요");
+        }
     }
 }

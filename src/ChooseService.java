@@ -74,48 +74,53 @@ public class ChooseService extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        reservationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ReserveFacility reserveFacility = new ReserveFacility();
-                reserveFacility.setVisible(true);
-            }
+        reservationButton.addActionListener(e -> {
+            openReserveFacility();
         });
-        cancellationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CancelReservation cancelReservation = new CancelReservation();
-                cancelReservation.setVisible(true);
-            }
+        cancellationButton.addActionListener(e -> {
+            openCalcenReservation();
         });
-        reservationStatusButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ReservationStatus reservationStatus = new ReservationStatus();
-                reservationStatus.setVisible(true);
-            }
+        reservationStatusButton.addActionListener(e -> {
+            openStatus();
         });
-        registerLostAndFoundButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RegisterFound registrationGUI = new RegisterFound();
-                registrationGUI.setVisible(true);
-            }
+        registerLostAndFoundButton.addActionListener(e -> {
+            openRegisterFound();
         });
-        deletionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DeleteLost deleteLost = new DeleteLost();
-                deleteLost.setVisible(true);
-            }
+        deletionButton.addActionListener(e -> {
+            openDeleteLost();
         });
-        CheckNotice.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CheckNotice checkNotice = new CheckNotice();
-                checkNotice.setVisible(true);
-            }
+        CheckNotice.addActionListener(e -> {
+            openCheckNotice();
         });
 
+    }
+    private void openReserveFacility() {
+        ReserveFacility reserveFacility = new ReserveFacility();
+        reserveFacility.setVisible(true);
+    }
+
+    private void openCalcenReservation() {
+        CancelReservation cancelReservation = new CancelReservation();
+        cancelReservation.setVisible(true);
+    }
+
+    private void openStatus() {
+        ReservationStatus reservationStatus = new ReservationStatus();
+        reservationStatus.setVisible(true);
+    }
+
+    private void openRegisterFound() {
+        RegisterFound registrationGUI = new RegisterFound();
+        registrationGUI.setVisible(true);
+    }
+
+    private void openDeleteLost() {
+        DeleteLost deleteLost = new DeleteLost();
+        deleteLost.setVisible(true);
+    }
+
+    private void openCheckNotice() {
+        CheckNotice checkNotice = new CheckNotice();
+        checkNotice.setVisible(true);
     }
 }

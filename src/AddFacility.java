@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.io.*;
 
 public class AddFacility extends JFrame {
-    private JLabel facilityLabel;
-
     private JTextField facilityField;
     private JButton registerButton;
 
@@ -17,7 +15,7 @@ public class AddFacility extends JFrame {
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        facilityLabel = new JLabel("등록할 편의시설명을 입력해주세요");
+        JLabel facilityLabel = new JLabel("등록할 편의시설명을 입력해주세요");
         facilityField = new JTextField(10);
 
         JPanel facilityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -32,27 +30,28 @@ public class AddFacility extends JFrame {
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         getContentPane().add(mainPanel);
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String facility = facilityField.getText();
-                try {
-                    FileWriter fw = new FileWriter("facility.csv", true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter pw = new PrintWriter(bw);
-
-                    pw.println(facility);
-
-                    pw.close();
-                    bw.close();
-                    fw.close();
-
-                    JOptionPane.showMessageDialog(null, "편의시설 등록이 완료되었습니다!");
-                    facilityField.setText("");
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Error Occurred!");
-                }
-            }
+        registerButton.addActionListener(e -> {
+           addFacility();
         });
+    }
+
+    private void addFacility() {
+        String facility = facilityField.getText();
+        try {
+            FileWriter fw = new FileWriter("facility.csv", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(facility);
+
+            pw.close();
+            bw.close();
+            fw.close();
+
+            JOptionPane.showMessageDialog(null, "편의시설 등록이 완료되었습니다!");
+            facilityField.setText("");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error Occurred!");
+        }
     }
 }

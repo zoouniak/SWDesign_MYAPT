@@ -3,9 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Admin extends JFrame {
-    private JLabel titleLabel, apartmentLabel, facilityLabel;
-    private JTextField apartmentField, facilityField;
-    private JButton registerApartmentButton, registerFacilityButton, registerNoticeButton, deleteNoticeButton;
 
     public Admin() {
         // Create and configure window
@@ -15,13 +12,13 @@ public class Admin extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create components
-        titleLabel = new JLabel("관리자 권한 기능입니다. 사용할 기능을 선택하세요");
+        JLabel titleLabel = new JLabel("관리자 권한 기능입니다. 사용할 기능을 선택하세요");
         titleLabel.setFont(new Font("굴림체", Font.BOLD, 20));
 
-        registerApartmentButton = new JButton("아파트 등록");
-        registerFacilityButton = new JButton("편의시설 등록");
-        registerNoticeButton = new JButton("공지사항 등록");
-        deleteNoticeButton = new JButton("공지사항 삭제");
+        JButton registerApartmentButton = new JButton("아파트 등록");
+        JButton registerFacilityButton = new JButton("편의시설 등록");
+        JButton registerNoticeButton = new JButton("공지사항 등록");
+        JButton deleteNoticeButton = new JButton("공지사항 삭제");
 
         // Add components to content pane
         Container contentPane = getContentPane();
@@ -48,32 +45,40 @@ public class Admin extends JFrame {
         contentPane.add(panel5);
 
         // Add button listeners
-        registerApartmentButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddApartment addApartment = new AddApartment();
-                addApartment.setVisible(true);
-            }
+        registerApartmentButton.addActionListener(e -> {
+            openAddApt();
         });
 
-        registerFacilityButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddFacility addFacility = new AddFacility();
-                addFacility.setVisible(true);
-            }
+        registerFacilityButton.addActionListener(e -> {
+            openAddFacility();
         });
 
-        registerNoticeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddNotice addNotice = new AddNotice();
-                addNotice.setVisible(true);
-            }
+        registerNoticeButton.addActionListener(e -> {
+            openAddNotice();
         });
 
-        deleteNoticeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DeleteNotice deleteNotice = new DeleteNotice();
-                deleteNotice.setVisible(true);
-            }
+        deleteNoticeButton.addActionListener(e -> {
+            openDeleteNotice();
         });
+    }
+
+    private void openAddApt() {
+        AddApartment addApartment = new AddApartment();
+        addApartment.setVisible(true);
+    }
+
+    private void openAddFacility() {
+        AddFacility addFacility = new AddFacility();
+        addFacility.setVisible(true);
+    }
+
+    private void openAddNotice() {
+        AddNotice addNotice = new AddNotice();
+        addNotice.setVisible(true);
+    }
+
+    private void openDeleteNotice() {
+        DeleteNotice deleteNotice = new DeleteNotice();
+        deleteNotice.setVisible(true);
     }
 }

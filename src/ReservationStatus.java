@@ -9,10 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ReservationStatus extends JFrame {
-
-    private JTable table;
-    private DefaultTableModel tableModel;
-
     public ReservationStatus() {
         super("MYAPT");
         setSize(500, 300);
@@ -25,8 +21,8 @@ public class ReservationStatus extends JFrame {
 
 
         // Create the table
-        tableModel = new DefaultTableModel(new String[]{"편의시설명", "예약날짜", "예약시간", "성함", "연락처"}, 0);
-        table = new JTable(tableModel);
+        DefaultTableModel tableModel = new DefaultTableModel(new String[]{"편의시설명", "예약날짜", "예약시간", "성함", "연락처"}, 0);
+        JTable table = new JTable(tableModel);
 
         // Add the table to the frame
         JScrollPane scrollPane = new JScrollPane(table);
@@ -39,16 +35,17 @@ public class ReservationStatus extends JFrame {
         }
 
         JButton goToReservationButton = new JButton("편의시설 예약하기");
-        goToReservationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ReserveFacility reserveFacility = new ReserveFacility();
-                reserveFacility.setVisible(true);
-            }
+        goToReservationButton.addActionListener(e -> {
+            openReserveFacility();
         });
         add(goToReservationButton, BorderLayout.SOUTH);
         // Show the frame
         setVisible(true);
+    }
+
+    private void openReserveFacility() {
+        ReserveFacility reserveFacility = new ReserveFacility();
+        reserveFacility.setVisible(true);
     }
 
     private ArrayList<String[]> readReservationsFromFile() {

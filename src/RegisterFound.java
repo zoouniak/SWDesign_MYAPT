@@ -11,8 +11,8 @@ public class RegisterFound extends JFrame {
     private JTextField dateField;
     private JTextField locationField;
     private JTextField storageField;
-    private JButton photoButton;
-    private JButton registerButton;
+    public JLabel photoLabel;
+    public JPanel photoPanel;
 
     public RegisterFound() {
         super("MYAPT");
@@ -65,16 +65,16 @@ public class RegisterFound extends JFrame {
         mainPanel.add(storagePanel, BorderLayout.CENTER);
 
         // Create photo panel for photo label and button
-        JPanel photoPanel = new JPanel(new FlowLayout());
+        photoPanel = new JPanel(new FlowLayout());
         JLabel photoLabel = new JLabel("사진:");
-        photoButton = new JButton("사진 선택하기");
+        JButton photoButton = new JButton("사진 선택하기");
         photoPanel.add(photoLabel);
         photoPanel.add(photoButton);
         mainPanel.add(photoPanel, BorderLayout.CENTER);
 
         // Create bottom panel for register button
         JPanel registerPanel = new JPanel(new FlowLayout());
-        registerButton = new JButton("등록하기");
+        JButton registerButton = new JButton("등록하기");
         registerPanel.add(registerButton);
         mainPanel.add(registerPanel, BorderLayout.SOUTH);
 
@@ -84,62 +84,64 @@ public class RegisterFound extends JFrame {
         // Set border for main panel
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        photoButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int result = fileChooser.showOpenDialog(RegisterFound.this);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    // TODO: Add code to handle the selected file
-                    ImageIcon imageIcon;
-                    imageIcon = new ImageIcon(selectedFile.getPath());
-                    photoLabel.setPreferredSize(new Dimension(200, 200));
-                    photoLabel.setIcon(imageIcon);
-                }
-                photoPanel.add(photoLabel, BorderLayout.EAST);
-            }
+        photoButton.addActionListener(e -> {
+            RegisterPhoto();
         });
 
-        registerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Get the values from the text fields
-                String name = nameField.getText();
-                String date = dateField.getText();
-                String location = locationField.getText();
-                String storage = storageField.getText();
-
-                // Check that all fields have been filled out
-                if (name.isEmpty() || date.isEmpty() || location.isEmpty() || storage.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
-                    return;
-                } else if (date.matches("\\d{4}/\\d{2}/\\d{2}")) {
-                    JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
-                }
-                else {
-                    try {
-                        FileWriter fw = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv", true);
-                        BufferedWriter bw = new BufferedWriter(fw);
-
-                        String data = name + "," + date + "," + location + "," + storage;
-                        bw.write(data);
-                        bw.newLine();
-                        bw.close();
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                    // Display a success message
-                    JOptionPane.showMessageDialog(null, "습득물 등록이 완료되었습니다.");
-
-                    // Clear the text fields
-                    nameField.setText("");
-                    dateField.setText("");
-                    locationField.setText("");
-                    storageField.setText("");
-                }
-            }
+        registerButton.addActionListener(e -> {
+            registerToFile();
         });
     }
 
+    private void RegisterPhoto() {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(RegisterFound.this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            // TODO: Add code to handle the selected file
+            ImageIcon imageIcon;
+            imageIcon = new ImageIcon(selectedFile.getPath());
+            photoLabel.setPreferredSize(new Dimension(200, 200));
+            photoLabel.setIcon(imageIcon);
+        }
+        photoPanel.add(photoLabel, BorderLayout.EAST);
+    }
+
+    private void registerToFile() {
+        // Get the values from the text fields
+        String name = nameField.getText();
+        String date = dateField.getText();
+        String location = locationField.getText();
+        String storage = storageField.getText();
+
+        // Check that all fields have been filled out
+        if (name.isEmpty() || date.isEmpty() || location.isEmpty() || storage.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
+            return;
+        } else if (date.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
+        } else {
+            try {
+                FileWriter fw = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                String data = name + "," + date + "," + location + "," + storage;
+                bw.write(data);
+                bw.newLine();
+                bw.close();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            // Display a success message
+            JOptionPane.showMessageDialog(null, "습득물 등록이 완료되었습니다.");
+
+            // Clear the text fields
+            nameField.setText("");
+            dateField.setText("");
+            locationField.setText("");
+            storageField.setText("");
+        }
+    }
 }
