@@ -33,12 +33,12 @@ public class AddApartment extends JFrame {
         getContentPane().add(mainPanel);
 
         registerButton.addActionListener(e -> {
-            AddApt();
+            String apartmentName = apartmentField.getText();
+            AddApt(apartmentName);
         });
     }
 
-    private void AddApt() {
-        String apartmentName = apartmentField.getText();
+    private void AddApt(String apartmentName) {
         if (!apartmentName.equals("")) {
             try {
                 FileWriter writer = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\AptList.csv", true);

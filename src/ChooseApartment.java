@@ -60,7 +60,8 @@ public class ChooseApartment extends JFrame {
         messagePanel.add(selectButton);
 
         selectButton.addActionListener((ActionListener) e -> {
-            select();
+            String selectedItem = (String) apartmentChoice.getSelectedItem();
+            select(selectedItem);
         });
 
         setVisible(true);
@@ -92,10 +93,8 @@ public class ChooseApartment extends JFrame {
         }
     }
 
-    private void select() {
+    private void select(String selectedItem) {
         // Get the selected item from the Choice component
-        String selectedItem = (String) apartmentChoice.getSelectedItem();
-
         // Check if an apartment was selected
         if (selectedItem.equals("선택")) {
             JOptionPane.showMessageDialog(null, "아파트를 선택하세요");

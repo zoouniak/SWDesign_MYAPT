@@ -73,7 +73,6 @@ public class ReserveFacility extends JFrame {
         printer.print(",");
         printer.print(contact);
         printer.println();
-
         printer.close();
         writer.close();
     }

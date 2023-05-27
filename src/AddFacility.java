@@ -31,12 +31,12 @@ public class AddFacility extends JFrame {
         getContentPane().add(mainPanel);
 
         registerButton.addActionListener(e -> {
-           addFacility();
+            String facility = facilityField.getText();
+           addFacility(facility);
         });
     }
 
-    private void addFacility() {
-        String facility = facilityField.getText();
+    private void addFacility(String facility) {
         try {
             FileWriter fw = new FileWriter("facility.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);

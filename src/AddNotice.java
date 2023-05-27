@@ -34,14 +34,14 @@ public class AddNotice extends JFrame {
         setVisible(true);
 
         registerButton.addActionListener(e -> {
-            addNotice();
+            String notice = NoticeField.getText();
+            addNotice(notice);
         });
 
         setVisible(true);
     }
 
-    private void addNotice() {
-        String notice = NoticeField.getText();
+    private void addNotice(String notice) {
         if (!notice.isEmpty()) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv", true));

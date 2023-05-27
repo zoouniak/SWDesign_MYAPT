@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class Login extends JFrame{
 
-    private JTextField jtf1;
-    private JPasswordField jtf2;
+    private final JTextField jtf1;
+    private final JPasswordField jtf2;
 
     public Login() {
         JPanel imagePanel = new JPanel(new BorderLayout());
