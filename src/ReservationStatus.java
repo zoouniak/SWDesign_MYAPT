@@ -13,6 +13,7 @@ public class ReservationStatus extends JFrame {
         super("MYAPT");
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         // Add a label to the top of the frame
         JLabel titleLabel = new JLabel("편의시설 예약 현황");

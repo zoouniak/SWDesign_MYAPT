@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ChooseService extends JFrame {
 
@@ -55,12 +53,12 @@ public class ChooseService extends JFrame {
         panel.add(registerLostAndFoundButton, c);
 
         // Add deletion button
-        JButton deletionButton = new JButton("분실물 삭제");
+        JButton CheckListButton = new JButton("습득물 조회");
         c.gridx = 1;
         c.gridy = 2;
         c.gridwidth = 1;
         c.insets = new Insets(10, 20, 10, 50);
-        panel.add(deletionButton, c);
+        panel.add(CheckListButton, c);
 
         JButton CheckNotice = new JButton("공지사항 확인");
         c.gridx = 1;
@@ -86,14 +84,15 @@ public class ChooseService extends JFrame {
         registerLostAndFoundButton.addActionListener(e -> {
             openRegisterFound();
         });
-        deletionButton.addActionListener(e -> {
-            openDeleteLost();
+        CheckListButton.addActionListener(e -> {
+            openCheckFound();
         });
         CheckNotice.addActionListener(e -> {
             openCheckNotice();
         });
 
     }
+
     private void openReserveFacility() {
         ReserveFacility reserveFacility = new ReserveFacility();
         reserveFacility.setVisible(true);
@@ -114,9 +113,9 @@ public class ChooseService extends JFrame {
         registrationGUI.setVisible(true);
     }
 
-    private void openDeleteLost() {
-        DeleteLost deleteLost = new DeleteLost();
-        deleteLost.setVisible(true);
+    private void openCheckFound() {
+        CheckFoundList checkFoundList = new CheckFoundList();
+        checkFoundList.setVisible(true);
     }
 
     private void openCheckNotice() {

@@ -19,6 +19,7 @@ public class ReserveFacility extends JFrame {
         super("MYAPT");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         // Create the panel and set the layout
         JPanel panel = new JPanel();
@@ -53,7 +54,7 @@ public class ReserveFacility extends JFrame {
 
         // Add an action listener to the reserve button
         reserveButton.addActionListener(e -> {
-            checkReservceInfo();
+            checkReservceInfo((String) FacilityCombo.getSelectedItem(),dateField.getText(),(String) timeCombo.getSelectedItem(),nameField.getText(),contactField.getText());
         });
         // Add the panel to the frame
         add(panel);
@@ -77,14 +78,9 @@ public class ReserveFacility extends JFrame {
         writer.close();
     }
 
-    private void checkReservceInfo() {
-        String Facility = (String) FacilityCombo.getSelectedItem();
-        String date = dateField.getText();
-        String time = (String) timeCombo.getSelectedItem();
-        String name = nameField.getText();
-        String contact = contactField.getText();
+    private void checkReservceInfo(String facility, String date, String time, String name, String contact) {
 
-        if (Facility.isEmpty() || date.isEmpty() || time.isEmpty() || name.isEmpty() || contact.isEmpty()) {
+        if (facility.isEmpty() || date.isEmpty() || time.isEmpty() || name.isEmpty() || contact.isEmpty()) {
             JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
         } else if (!date.matches("\\d{4}/\\d{2}/\\d{2}")) {
             JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
@@ -94,7 +90,7 @@ public class ReserveFacility extends JFrame {
         } else {
             // Show a confirmation message
             try {
-                saveReservation(Facility, date, time, name, contact);
+                saveReservation(facility, date, time, name, contact);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

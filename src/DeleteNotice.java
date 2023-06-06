@@ -15,14 +15,7 @@ public class DeleteNotice extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Load notices from file
-        notices = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
-            while (scanner.hasNextLine()) {
-                notices.add(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Notice.csv not found");
-        }
+        notices = readFromFile();
 
         // Create check boxes
         checkBoxes = new JCheckBox[notices.size()];
@@ -44,7 +37,20 @@ public class DeleteNotice extends JFrame {
 
         setVisible(true);
     }
-    private void deleteFromFile(){
+
+    private ArrayList<String> readFromFile() {
+        ArrayList<String> notices = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
+            while (scanner.hasNextLine()) {
+                notices.add(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Notice.csv not found");
+        }
+        return notices;
+    }
+
+    private void deleteFromFile() {
         try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (!checkBoxes[i].isSelected()) {

@@ -18,6 +18,7 @@ public class RegisterFound extends JFrame {
         super("MYAPT");
         setSize(1000, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         // Create main panel and set layout
         JPanel mainPanel = new JPanel();
@@ -89,7 +90,7 @@ public class RegisterFound extends JFrame {
         });
 
         registerButton.addActionListener(e -> {
-            registerToFile();
+            registerToFile(nameField.getText(),dateField.getText(),locationField.getText(),storageField.getText() );
         });
     }
 
@@ -107,27 +108,19 @@ public class RegisterFound extends JFrame {
         photoPanel.add(photoLabel, BorderLayout.EAST);
     }
 
-    private void registerToFile() {
-        // Get the values from the text fields
-        String name = nameField.getText();
-        String date = dateField.getText();
-        String location = locationField.getText();
-        String storage = storageField.getText();
-
-        // Check that all fields have been filled out
+    private void registerToFile(String name,String date,String location,String storage) {
         if (name.isEmpty() || date.isEmpty() || location.isEmpty() || storage.isEmpty()) {
             JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
             return;
-        } else if (date.matches("\\d{4}/\\d{2}/\\d{2}")) {
+        } else if (!date.matches("\\d{4}/\\d{2}/\\d{2}")) {
             JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
         } else {
             try {
                 FileWriter fw = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv", true);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                String data = name + "," + date + "," + location + "," + storage;
+                String data = name + "," + date + "," + location + "," + storage+"\n";
                 bw.write(data);
-                bw.newLine();
                 bw.close();
 
             } catch (Exception ex) {

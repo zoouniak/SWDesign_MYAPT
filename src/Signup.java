@@ -77,7 +77,7 @@ public class Signup extends JFrame {
             SignInfoCheck();
         });
         checkIdButton.addActionListener(e -> {
-            IdDuplicateCheck();
+            IdDuplicateCheck(idField.getText());
         });
     }
 
@@ -103,8 +103,7 @@ public class Signup extends JFrame {
         return false;
     }
 
-    private void IdDuplicateCheck() {
-        String idToCheck = idField.getText();
+    private void IdDuplicateCheck(String idToCheck) {
         if (idToCheck.isEmpty()) {
             JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
             return;

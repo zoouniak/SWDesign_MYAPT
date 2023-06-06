@@ -22,7 +22,7 @@ public class Login extends JFrame{
         JPanel title = new JPanel();
 
         JLabel login = new JLabel("로그인을 해주세요");
-        login.setForeground(new Color(5, 0, 153));
+        login.setForeground(new Color(0, 20, 153));
 
         title.add(login);
         JPanel jp1 = new JPanel();
@@ -75,7 +75,7 @@ public class Login extends JFrame{
         jLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleLogin();
+                handleLogin(jtf1.getText(),new String(jtf2.getPassword()));
             }
         });
 
@@ -99,9 +99,7 @@ public class Login extends JFrame{
 
         setVisible(true);
     }
-    private void handleLogin() {
-        String enteredUsername = jtf1.getText();
-        String enteredPassword = new String(jtf2.getPassword());
+    private void handleLogin(String enteredUsername,String enteredPassword) {
 
         try {
             if(enteredUsername.isEmpty() || enteredPassword.isEmpty()){

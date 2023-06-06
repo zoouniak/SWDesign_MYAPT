@@ -13,6 +13,7 @@ public class CancelReservation extends JFrame  {
         super("MYAPT");
         setSize(700, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         // Set up the panel
         JPanel panel = new JPanel(new GridLayout(3, 1));
