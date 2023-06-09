@@ -4,8 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 
 public class AddNotice extends JFrame {
-    private JTextArea NoticeField;
-    private JButton registerButton;
+    private String notice;
 
     public AddNotice() {
         super("MYAPT");
@@ -19,14 +18,14 @@ public class AddNotice extends JFrame {
         NoticeLabel.setFont(new Font("굴림", Font.PLAIN, 35));
         NoticeLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        NoticeField = new JTextArea();
+        JTextArea NoticeField = new JTextArea();
         NoticeField.setLineWrap(true);
       // NoticeField.setWrapStyleWord(true);
 
         mainPanel.add(NoticeLabel, BorderLayout.NORTH);
         mainPanel.add(NoticeField, BorderLayout.CENTER);
 
-        registerButton = new JButton("등록하기");
+        JButton registerButton = new JButton("등록하기");
 
         mainPanel.add(registerButton, BorderLayout.SOUTH);
 
@@ -34,7 +33,7 @@ public class AddNotice extends JFrame {
         setVisible(true);
 
         registerButton.addActionListener(e -> {
-            String notice = NoticeField.getText();
+            notice = NoticeField.getText();
             addNotice(notice);
         });
 
@@ -48,7 +47,7 @@ public class AddNotice extends JFrame {
                 writer.write(notice + "\n");
                 writer.close();
                 JOptionPane.showMessageDialog(null, "공지사항이 성공적으로 등록되었습니다.");
-                NoticeField.setText("");
+                setVisible(false);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error saving notice to file");
                 ex.printStackTrace();

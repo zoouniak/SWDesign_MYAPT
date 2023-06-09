@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ChooseApartment extends JFrame {
     List<String> apartmentNames;
-    JComboBox<String> apartmentChoice;
+    private String SelectedApt;
 
     public ChooseApartment() {
         // Set up the frame
@@ -44,7 +44,7 @@ public class ChooseApartment extends JFrame {
         }
 
 // Create the JComboBox with the apartment options
-        apartmentChoice = new JComboBox<>(apartmentOptions);
+        JComboBox<String> apartmentChoice = new JComboBox<>(apartmentOptions);
         apartmentChoice.setSelectedIndex(0);
 
         // Add the Choice component to the panel
@@ -60,8 +60,8 @@ public class ChooseApartment extends JFrame {
         messagePanel.add(selectButton);
 
         selectButton.addActionListener((ActionListener) e -> {
-            String selectedItem = (String) apartmentChoice.getSelectedItem();
-            select(selectedItem);
+            SelectedApt=(String) apartmentChoice.getSelectedItem();
+            select(SelectedApt);
         });
 
         setVisible(true);

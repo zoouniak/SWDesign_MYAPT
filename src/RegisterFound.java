@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class RegisterFound extends JFrame {
-    private JTextField nameField;
-    private JTextField dateField;
-    private JTextField locationField;
-    private JTextField storageField;
     public JLabel photoLabel;
     public JPanel photoPanel;
+    private String name;
+    private String date;
+    private String location;
+    private String storage;
 
     public RegisterFound() {
         super("MYAPT");
@@ -32,7 +32,7 @@ public class RegisterFound extends JFrame {
         // Create top panel for name label and text field
         JPanel namePanel = new JPanel(new FlowLayout());
         JLabel nameLabel = new JLabel("습득물 이름:");
-        nameField = new JTextField();
+        JTextField nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(400, 30));
         namePanel.add(nameLabel);
         namePanel.add(nameField);
@@ -41,7 +41,7 @@ public class RegisterFound extends JFrame {
         // Create middle panel for date label and text field
         JPanel datePanel = new JPanel(new FlowLayout());
         JLabel dateLabel = new JLabel("습득 날짜:");
-        dateField = new JTextField();
+        JTextField dateField = new JTextField();
         dateField.setPreferredSize(new Dimension(400, 30));
         datePanel.add(dateLabel);
         datePanel.add(dateField);
@@ -50,7 +50,7 @@ public class RegisterFound extends JFrame {
         // Create location panel for location label and text field
         JPanel locationPanel = new JPanel(new FlowLayout());
         JLabel locationLabel = new JLabel("습득 장소:");
-        locationField = new JTextField();
+        JTextField locationField = new JTextField();
         locationField.setPreferredSize(new Dimension(400, 30));
         locationPanel.add(locationLabel);
         locationPanel.add(locationField);
@@ -59,7 +59,7 @@ public class RegisterFound extends JFrame {
         // Create storage panel for storage label and text field
         JPanel storagePanel = new JPanel(new FlowLayout());
         JLabel storageLabel = new JLabel("보관 장소:");
-        storageField = new JTextField();
+        JTextField storageField = new JTextField();
         storageField.setPreferredSize(new Dimension(400, 30));
         storagePanel.add(storageLabel);
         storagePanel.add(storageField);
@@ -90,7 +90,11 @@ public class RegisterFound extends JFrame {
         });
 
         registerButton.addActionListener(e -> {
-            registerToFile(nameField.getText(),dateField.getText(),locationField.getText(),storageField.getText() );
+            name=nameField.getText();
+            date=dateField.getText();
+            location=locationField.getText();
+            storage=storageField.getText();
+            registerToFile(name,date,location,storage );
         });
     }
 
@@ -129,12 +133,7 @@ public class RegisterFound extends JFrame {
 
             // Display a success message
             JOptionPane.showMessageDialog(null, "습득물 등록이 완료되었습니다.");
-
-            // Clear the text fields
-            nameField.setText("");
-            dateField.setText("");
-            locationField.setText("");
-            storageField.setText("");
+            setVisible(false);
         }
     }
 }

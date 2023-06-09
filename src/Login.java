@@ -5,10 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Login extends JFrame{
-
-    private final JTextField jtf1;
-    private final JPasswordField jtf2;
-
+    private String id;
+    private String password;
     public Login() {
         JPanel imagePanel = new JPanel(new BorderLayout());
         ImageIcon imageIcon = new ImageIcon("src/logo.png");
@@ -33,7 +31,7 @@ public class Login extends JFrame{
         idPanel.add(jlb1);
 
         JPanel idPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        jtf1 = new JTextField(10);
+        JTextField jtf1 = new JTextField(10);
 
         idPanel2.add(jtf1);
 
@@ -44,7 +42,7 @@ public class Login extends JFrame{
         JLabel jlb2 = new JLabel("비밀번호 : ", JLabel.CENTER);
 
         JPanel pwdPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        jtf2 = new JPasswordField(10);
+        JPasswordField jtf2 = new JPasswordField(10);
 
         pwdPanel.add(jlb2);
         pwdPanel2.add(jtf2);
@@ -73,9 +71,12 @@ public class Login extends JFrame{
             }
         });
         jLogin.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleLogin(jtf1.getText(),new String(jtf2.getPassword()));
+                id = jtf1.getText();
+                password = new String(jtf2.getPassword());
+                handleLogin(id,password);
             }
         });
 
@@ -106,7 +107,7 @@ public class Login extends JFrame{
                 JOptionPane.showMessageDialog(Login.this,"아이디와 비밀번호를 입력하세요","Nother Entered",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            boolean loginSuccessful = User.checkLoginInfo(enteredUsername, enteredPassword, "C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv");
+            boolean loginSuccessful = User.checkLoginInfo(enteredUsername, enteredPassword);
 
 
             if (loginSuccessful) {

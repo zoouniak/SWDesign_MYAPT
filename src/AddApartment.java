@@ -5,9 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class AddApartment extends JFrame {
-    private JTextField apartmentField;
-    private JButton registerButton;
-
+    private String aptName;
     public AddApartment() {
         setTitle("MYAPT");
         setLocationRelativeTo(null);
@@ -18,14 +16,14 @@ public class AddApartment extends JFrame {
 
 
         JLabel apartmentLabel = new JLabel("새로 등록할 아파트 이름을 입력해주세요");
-        apartmentField = new JTextField(20);
+        JTextField apartmentField = new JTextField(20);
 
         JPanel apartmentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         apartmentPanel.add(apartmentLabel);
         apartmentPanel.add(apartmentField);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        registerButton = new JButton("아파트 등록하기");
+        JButton registerButton = new JButton("아파트 등록하기");
         buttonPanel.add(registerButton);
 
         mainPanel.add(apartmentPanel, BorderLayout.CENTER);
@@ -33,8 +31,8 @@ public class AddApartment extends JFrame {
         getContentPane().add(mainPanel);
 
         registerButton.addActionListener(e -> {
-            String apartmentName = apartmentField.getText();
-            AddApt(apartmentName);
+            aptName = apartmentField.getText();
+            AddApt(aptName);
         });
     }
 
@@ -45,7 +43,7 @@ public class AddApartment extends JFrame {
                 writer.write(apartmentName + "\n");
                 writer.close();
                 JOptionPane.showMessageDialog(null, "아파트가 등록되었습니다.");
-                apartmentField.setText("");
+                setVisible(false);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

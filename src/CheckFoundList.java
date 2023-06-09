@@ -6,15 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CheckFoundList extends JFrame {
-    private JTable table;
-
+  
     public CheckFoundList() {
         setTitle("Lost and Found List");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);
 
-        table = new JTable();
+        JTable table = new JTable();
         JScrollPane scrollPane = new JScrollPane(table);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 

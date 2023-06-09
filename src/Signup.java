@@ -7,11 +7,12 @@ import java.awt.event.FocusListener;
 import java.io.*;
 
 public class Signup extends JFrame {
-    JTextField idField;
-    JPasswordField passwordField;
-    JPasswordField confirmField;
-    JTextField contactArea;
 
+    private String id;
+    private String password;
+    private String confirm;
+    private String contact;
+    public JTextField idField;
     public Signup() {
 
         setTitle("MYAPT JOIN");
@@ -31,19 +32,19 @@ public class Signup extends JFrame {
 
         JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel passwordLabel = new JLabel("비밀번호: ");
-        passwordField = new JPasswordField(20);
+        JPasswordField passwordField = new JPasswordField(20);
         passwordPanel.add(passwordLabel);
         passwordPanel.add(passwordField);
 
         JPanel confirmPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel confirmLabel = new JLabel("비밀번호 확인: ");
-        confirmField = new JPasswordField(20);
+        JPasswordField confirmField = new JPasswordField(20);
         confirmPanel.add(confirmLabel);
         confirmPanel.add(confirmField);
 
         JPanel contactPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel contactLabel = new JLabel("연락처: ");
-        contactArea = new JTextField(20);
+        JTextField contactArea = new JTextField(20);
         contactPanel.add(contactLabel);
         contactPanel.add(contactArea);
 
@@ -74,7 +75,11 @@ public class Signup extends JFrame {
         setVisible(true);
 
         registerButton.addActionListener(e -> {
-            SignInfoCheck();
+            id = idField.getText();
+            password=new String(passwordField.getPassword());
+            confirm=new String(confirmField.getPassword());
+            contact=contactArea.getText();
+            SignInfoCheck(id,password,confirm,contact);
         });
         checkIdButton.addActionListener(e -> {
             IdDuplicateCheck(idField.getText());
@@ -123,11 +128,7 @@ public class Signup extends JFrame {
         }
     }
 
-    private void SignInfoCheck() {
-        String id = idField.getText();
-        String password = new String(passwordField.getPassword());
-        String confirm = new String(confirmField.getPassword());
-        String contact = contactArea.getText();
+    private void SignInfoCheck(String id,String password,String confirm,String contact ) {
 
         // Validate input and process registration
         if (id.isEmpty() || password.isEmpty() || confirm.isEmpty() || contact.isEmpty()) {

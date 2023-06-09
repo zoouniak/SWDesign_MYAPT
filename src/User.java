@@ -5,33 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String username;
+    private String id;
     private String password;
 
     public User(String username, String password) {
-        this.username = username;
+        this.id = username;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public static boolean checkLoginInfo(String username, String password, String fileName) throws IOException {
-        List<User> users = readLoginsFromFile(fileName);
+    public static boolean checkLoginInfo(String username, String password) throws IOException {
+        List<User> users = readUserFromFile("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv");
         for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getId().equals(username) && user.getPassword().equals(password)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static List<User> readLoginsFromFile(String fileName) throws IOException {
+    public static List<User> readUserFromFile(String fileName) throws IOException {
         List<User> users = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         String line;

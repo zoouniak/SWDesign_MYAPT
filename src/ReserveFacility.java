@@ -7,12 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ReserveFacility extends JFrame {
-
-    private JComboBox<String> FacilityCombo;
-    private JComboBox<String> timeCombo;
-    private JTextField dateField;
-    private JTextField nameField;
-    private JTextField contactField;
+    private String facility;
+    private String date;
+    private String time;
+    private String name;
+    private String contact;
 
     public ReserveFacility() {
         // Set up the frame
@@ -31,11 +30,11 @@ public class ReserveFacility extends JFrame {
         JLabel timeLabel = new JLabel("이용 시간:");
         JLabel nameLabel = new JLabel("성함:");
         JLabel contactLabel = new JLabel("연락처:");
-        FacilityCombo = new JComboBox<>(new String[]{"헬스장", "축구장", "농구장", "독서실"});
-        dateField = new JTextField();
-        timeCombo = new JComboBox<>(new String[]{"9:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00"});
-        nameField = new JTextField();
-        contactField = new JTextField();
+        JComboBox<String> FacilityCombo = new JComboBox<>(new String[]{"헬스장", "축구장", "농구장", "독서실"});
+        JTextField dateField = new JTextField();
+        JComboBox<String> timeCombo = new JComboBox<>(new String[]{"9:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00"});
+        JTextField nameField = new JTextField();
+        JTextField contactField = new JTextField();
         JButton reserveButton = new JButton("예약하기");
 
         // Add the components to the panel
@@ -54,7 +53,12 @@ public class ReserveFacility extends JFrame {
 
         // Add an action listener to the reserve button
         reserveButton.addActionListener(e -> {
-            checkReservceInfo((String) FacilityCombo.getSelectedItem(),dateField.getText(),(String) timeCombo.getSelectedItem(),nameField.getText(),contactField.getText());
+            facility = (String) FacilityCombo.getSelectedItem();
+            date = dateField.getText();
+            time = (String) timeCombo.getSelectedItem();
+            name = nameField.getText();
+            contact = contactField.getText();
+            checkReservceInfo(facility,date,time,name,contact);
         });
         // Add the panel to the frame
         add(panel);

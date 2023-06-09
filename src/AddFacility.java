@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.io.*;
 
 public class AddFacility extends JFrame {
-    private JTextField facilityField;
-    private JButton registerButton;
+   private String facility;
 
     public AddFacility() {
         setTitle("MYAPT");
@@ -16,14 +15,14 @@ public class AddFacility extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         JLabel facilityLabel = new JLabel("등록할 편의시설명을 입력해주세요");
-        facilityField = new JTextField(10);
+        JTextField facilityField = new JTextField(10);
 
         JPanel facilityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         facilityPanel.add(facilityLabel);
         facilityPanel.add(facilityField);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        registerButton = new JButton("등록하기");
+        JButton registerButton = new JButton("등록하기");
         buttonPanel.add(registerButton);
 
         mainPanel.add(facilityPanel, BorderLayout.CENTER);
@@ -31,7 +30,7 @@ public class AddFacility extends JFrame {
         getContentPane().add(mainPanel);
 
         registerButton.addActionListener(e -> {
-            String facility = facilityField.getText();
+           facility = facilityField.getText();
            addFacility(facility);
         });
     }
@@ -49,7 +48,7 @@ public class AddFacility extends JFrame {
             fw.close();
 
             JOptionPane.showMessageDialog(null, "편의시설 등록이 완료되었습니다!");
-            facilityField.setText("");
+            setVisible(false);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error Occurred!");
         }

@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public class CancelReservation extends JFrame  {
-
-    private JComboBox<String> reservationComboBox;
+    public JComboBox<String> reservationComboBox;
+    private String selectedReservation;
 
     public CancelReservation() {
         // Set up the frame
@@ -34,7 +34,7 @@ public class CancelReservation extends JFrame  {
         JButton cancelButton = new JButton("예약 취소하기");
         //cancelButton.addActionListener(this);
         cancelButton.addActionListener(e -> {
-            String selectedReservation = (String) reservationComboBox.getSelectedItem();
+            selectedReservation = (String) reservationComboBox.getSelectedItem();
             deleteFromFile(selectedReservation);
         });
         panel.add(cancelButton);
@@ -64,7 +64,6 @@ public class CancelReservation extends JFrame  {
     }
 
     private void deleteFromFile(String selectedReservation){
-
 
             // Remove the selected reservation from the combo box
             reservationComboBox.removeItem(selectedReservation);
