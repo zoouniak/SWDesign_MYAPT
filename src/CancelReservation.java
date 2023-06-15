@@ -82,15 +82,15 @@ public class CancelReservation extends JFrame  {
                 }
                 reader.close();
                 writer.close();
-                File oldFile = new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv");
+                File oldFile = new File("reservation.csv");
                 oldFile.delete();
-                File newFile = new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\temp.csv");
+                File newFile = new File("temp.csv");
                 newFile.renameTo(oldFile);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
 
             // Show a message dialog
-            JOptionPane.showMessageDialog(this, "Reservation cancelled successfully.");
+            JOptionPane.showMessageDialog(this, "예약이 성공적으로 취소되었습니다.");
         }
     }

@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReserveFacility extends JFrame {
     private String facility;
@@ -12,6 +10,8 @@ public class ReserveFacility extends JFrame {
     private String time;
     private String name;
     private String contact;
+    List<String> facilities;
+    private String SelectedFacility;
 
     public ReserveFacility() {
         // Set up the frame
@@ -24,13 +24,19 @@ public class ReserveFacility extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(6, 2, 10, 10));
 
+        Getfacility();
+        String[] FacilityOptions = new String[facilities.size() ];
+        for (int i = 0; i < facilities.size(); i++) {
+            FacilityOptions[i ] = facilities.get(i);
+        }
+        JComboBox<String> facilityChoice = new JComboBox<>(FacilityOptions);
         // Create the components
         JLabel FacilityLabel = new JLabel("편의시설명:");
         JLabel dateLabel = new JLabel("이용하실 날짜:");
         JLabel timeLabel = new JLabel("이용 시간:");
         JLabel nameLabel = new JLabel("성함:");
         JLabel contactLabel = new JLabel("연락처:");
-        JComboBox<String> FacilityCombo = new JComboBox<>(new String[]{"헬스장", "축구장", "농구장", "독서실"});
+       // JComboBox<String> FacilityCombo = new JComboBox<>(new String[]{"헬스장", "축구장", "농구장", "독서실"});
         JTextField dateField = new JTextField();
         JComboBox<String> timeCombo = new JComboBox<>(new String[]{"9:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00"});
         JTextField nameField = new JTextField();
@@ -39,7 +45,7 @@ public class ReserveFacility extends JFrame {
 
         // Add the components to the panel
         panel.add(FacilityLabel);
-        panel.add(FacilityCombo);
+        panel.add(facilityChoice);
         panel.add(dateLabel);
         panel.add(dateField);
         panel.add(timeLabel);
@@ -53,7 +59,7 @@ public class ReserveFacility extends JFrame {
 
         // Add an action listener to the reserve button
         reserveButton.addActionListener(e -> {
-            facility = (String) FacilityCombo.getSelectedItem();
+            facility = (String) facilityChoice.getSelectedItem();
             date = dateField.getText();
             time = (String) timeCombo.getSelectedItem();
             name = nameField.getText();
@@ -63,6 +69,31 @@ public class ReserveFacility extends JFrame {
         // Add the panel to the frame
         add(panel);
 
+    }
+    public void Getfacility() {
+        // Create a list to hold the apartment names
+        facilities = new ArrayList<>();
+
+        // Create a new File object with the file path
+        File file = new File("facilityList.csv");
+
+        // Create a new BufferedReader to read the file
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+
+            // Read each line of the file
+            while ((line = reader.readLine()) != null) {
+                // Split the line into an array of apartment names
+                String[] apartmentRow = line.split(",");
+
+                // Add each apartment name to the list
+                for (String facilityname : apartmentRow) {
+                    facilities.add(facilityname.trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveReservation(String facility, String date, String time, String name, String contact) throws IOException {
