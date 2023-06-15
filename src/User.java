@@ -22,7 +22,7 @@ public class User {
     }
 
     public static boolean checkLoginInfo(String username, String password) throws IOException {
-        List<User> users = readUserFromFile("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv");
+        List<User> users = readUserFromFile("login.csv");
         for (User user : users) {
             if (user.getId().equals(username) && user.getPassword().equals(password)) {
                 return true;

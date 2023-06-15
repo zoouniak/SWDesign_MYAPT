@@ -33,7 +33,7 @@ public class CheckNotice extends JFrame {
 
     private void loadNotices() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("Notice.csv"));
             ArrayList<String> notices = new ArrayList<>();
 
             String line = reader.readLine();

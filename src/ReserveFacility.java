@@ -66,7 +66,7 @@ public class ReserveFacility extends JFrame {
     }
 
     private void saveReservation(String facility, String date, String time, String name, String contact) throws IOException {
-        FileWriter writer = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv", true);
+        FileWriter writer = new FileWriter("reservation.csv", true);
         PrintWriter printer = new PrintWriter(writer);
         printer.print(facility);
         printer.print(",");

@@ -72,7 +72,7 @@ public class ChooseApartment extends JFrame {
         apartmentNames = new ArrayList<>();
 
         // Create a new File object with the file path
-        File file = new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\AptList.csv");
+        File file = new File("AptList.csv");
 
         // Create a new BufferedReader to read the file
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

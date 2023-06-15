@@ -32,7 +32,7 @@ public class CheckFoundList extends JFrame {
         model.addColumn("습득 장소");
         model.addColumn("보관 장소");
 
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader("FoundList.csv"));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");

@@ -43,7 +43,7 @@ public class AddNotice extends JFrame {
     private void addNotice(String notice) {
         if (!notice.isEmpty()) {
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("Notice.csv", true));
                 writer.write(notice + "\n");
                 writer.close();
                 JOptionPane.showMessageDialog(null, "공지사항이 성공적으로 등록되었습니다.");

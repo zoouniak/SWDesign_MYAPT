@@ -50,7 +50,7 @@ public class ReservationStatus extends JFrame {
     private ArrayList<String[]> readReservationsFromFile() {
         ArrayList<String[]> reservations = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("reservation.csv"));
             String line = reader.readLine();
             while (line != null) {
                 String[] fields = line.split(",");

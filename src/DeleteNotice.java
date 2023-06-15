@@ -40,7 +40,7 @@ public class DeleteNotice extends JFrame {
 
     private ArrayList<String> readFromFile() {
         ArrayList<String> notices = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
+        try (Scanner scanner = new Scanner(new File("Notice.csv"))) {
             while (scanner.hasNextLine()) {
                 notices.add(scanner.nextLine());
             }
@@ -51,7 +51,7 @@ public class DeleteNotice extends JFrame {
     }
 
     private void deleteFromFile() {
-        try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\Notice.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File("Notice.csv"))) {
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (!checkBoxes[i].isSelected()) {
                     writer.println(notices.get(i));

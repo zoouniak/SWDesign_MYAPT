@@ -120,7 +120,7 @@ public class RegisterFound extends JFrame {
             JOptionPane.showMessageDialog(null, "날짜 입력 양식(YYYY/MM/DD)에 맞게 입력해주세요.");
         } else {
             try {
-                FileWriter fw = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\FoundList.csv", true);
+                FileWriter fw = new FileWriter("FoundList.csv", true);
                 BufferedWriter bw = new BufferedWriter(fw);
 
                 String data = name + "," + date + "," + location + "," + storage+"\n";

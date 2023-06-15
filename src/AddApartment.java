@@ -39,7 +39,7 @@ public class AddApartment extends JFrame {
     private void AddApt(String apartmentName) {
         if (!apartmentName.equals("")) {
             try {
-                FileWriter writer = new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\AptList.csv", true);
+                FileWriter writer = new FileWriter("AptList.csv", true);
                 writer.write(apartmentName + "\n");
                 writer.close();
                 JOptionPane.showMessageDialog(null, "아파트가 등록되었습니다.");

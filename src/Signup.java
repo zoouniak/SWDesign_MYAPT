@@ -88,7 +88,7 @@ public class Signup extends JFrame {
 
     private boolean checkIdExists(String idToCheck) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("login.csv"));
             String line;
 
             while ((line = reader.readLine()) != null) {
@@ -143,7 +143,7 @@ public class Signup extends JFrame {
         } else {
             try {
                 //csv파일에 아이디 비밀번호 저장
-                PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\login.csv", true));
+                PrintWriter writer = new PrintWriter(new FileWriter("login.csv", true));
                 writer.println(id + "," + password);
                 writer.close();
                 JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");

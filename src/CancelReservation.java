@@ -48,7 +48,7 @@ public class CancelReservation extends JFrame  {
 
     private void readReservationsFromFile() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("reservation.csv"));
             String line = reader.readLine();
             while (line != null) {
                 String[] fields = line.split(",");
@@ -70,8 +70,8 @@ public class CancelReservation extends JFrame  {
 
             // Remove the selected reservation from the file
             try {
-                BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\reservation.csv"));
-                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\오주은\\Desktop\\학교\\소프트웨어설계\\temp.csv"));
+                BufferedReader reader = new BufferedReader(new FileReader("reservation.csv"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("temp.csv"));
                 String line = reader.readLine();
                 while (line != null) {
                     if (!line.equals(selectedReservation)) {
