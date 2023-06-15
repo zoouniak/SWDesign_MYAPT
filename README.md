@@ -13,4 +13,6 @@ Usage : Login.java를 실행하면 해당 시스템이 동작합니다.
 
 Contributing : 영남대학교 컴퓨터공학과 22112055 오주은
 
+<img src="https://github.com/zoouniak/SWDesign_MYAPT/assets/88364328/8ec680ea-497d-49e9-8d5a-f998628e7e48"> 
+
 
